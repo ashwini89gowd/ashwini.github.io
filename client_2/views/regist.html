@@ -1,0 +1,31 @@
+<md-content  layout-padding  class="md-title md-whiteframe-1dp col-sm-8" flex='100'>
+<!-- <md-content  layout-padding class="md-title md-whiteframe-1dp mt20" flex='60'> -->
+	<h3>Regist here</h3>
+	<form ng-submit="submit()" name='regist'>
+		<md-input-container class="md-block">
+			<label>Name</label>
+			<input type="text" ng-model="name" required/><br />
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Phone</label>
+			<input type="text" ng-model="phone" required/><br />
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Email</label>
+			<input type="email" name="email" ng-model="email" required/><br />
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Email confirmation</label>
+			<input type="email" name="email" ng-model="confirmEmail" required/><br />
+		</md-input-container>
+		
+		<span class="alert alert-danger" ng-if="email != '' " ng-show="email !== confirmEmail">Email mismatch</span>
+		
+		<md-input-container class="md-block">
+			<label>Password</label>
+			<input type="password" ng-model="password" required></input>
+		</md-input-container>
+		
+		<md-button type="submit" ng-disabled="regist.$invalid" class="md-primary md-raised">Register</md-button>
+	</form>
+</md-content>

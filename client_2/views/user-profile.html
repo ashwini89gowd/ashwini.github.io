@@ -1,0 +1,72 @@
+<md-content class='md-whiteframe-1dp mt20 md-title' layout-padding layout-wrap flex='60'>
+	<h1>{{user.name}}'s Profile</h1>
+	<form ng-submit="submit()" name="edit">
+		<md-input-container class="md-block">
+			<label>Full name</label>
+			<input ng-model="user.name"/>
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>Username</label>
+			<input ng-model="user.username"/>
+		</md-input-container class="md-block">
+		<!-- {{ user.type }} -->
+		
+		<md-input-container class="md-block">
+			<label>Email</label>
+			<input ng-model="user.email" type="email" disabled="disabled" />
+		</md-input-container class="md-block">
+		<select ng-model="user.gender" class="front-search">
+			<option value="">Select Gender</option>
+			<option value="m">Male</option>
+			<option value="f">Female</option>
+			<option value="o">Other</option>
+			</select><br /><br />
+		<!-- <md-input-container class="md-block">
+			<label>Type</label>
+			<input ng-model="user.type" ng-value='user.type' disabled="disabled" />
+		</md-input-container class="md-block"> -->
+		<select ng-model="user.type" class="col-md-4 col-sm-12 col-xs-10 front-search" disabled="disabled">
+			<option value="">User type</option>
+			<option value="expert">Expert</option>
+			<option value="consumer">Consumer</option>
+		</select><br /><br />
+
+		<div ng-show="user.type=='expert'">
+			<SELECT  class="col-md-4 col-sm-12 col-xs-10 front-search" style="color:#333;" ng-model="user.expert_category" ng-change="onSelect(user.expert_category)" disabled="disabled">
+		    	<option value="">Select expertise Category</option>
+				<option ng-repeat="category in categories" value="{{category.id}}" >{{category.title}}</option>
+		    </SELECT>
+
+		    <SELECT  class="col-md-4 col-sm-12 col-xs-10 col-md-offset-1 front-search" style="color:#333;" ng-model="user.expert_sub_category" disabled="disabled">
+		    	<option value="" >Select expertise sub category</option>
+		        <option ng-repeat="subcategory in subcategories" value="{{subcategory.id}}" >{{subcategory.title}}</option>
+		    </SELECT><br /><br /><br /><br />
+	    </div>
+	    
+		<md-input-container class="md-block">
+			<label>Phone</label>
+			<input ng-model='user.phone' />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>Country</label>
+			<input ng-model="user.country" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>State</label>
+			<input ng-model="user.state" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>City</label>
+			<input ng-model="user.city" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>Address</label>
+			<input ng-model="user.address" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>National ID #</label>
+			<input ng-model="user.national_id" />
+		</md-input-container class="md-block">
+		<!-- <md-button type="submit" ng-disabled="edit.$invalid" class="md-primary md-raised md-hue-1">OK Modify</button> -->
+	</form>
+</md-content>

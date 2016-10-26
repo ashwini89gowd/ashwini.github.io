@@ -1,0 +1,30 @@
+<div layout-align='space-between center' layout-warp class="md-whiteframe-5dp show-question">
+	<md-button ui-sref="home" class="md-primary md-block md-accent">Back</md-button>
+	<h1 class='md-display-1 title'>{{question.title}} </h1>
+	<md-content flex layout-padding class='md-title'>
+		<p>{{question.content}}</p>
+
+		<!--<div ng-controller="CategoryCtrl" >-->
+			<b> Category :</b> <a ng-click="questionByCategory(category.id)"> {{category.title}} </a>
+		<!--</div>-->
+
+		<div class='md-block author'>Author:{{question.owner.email}}</div>
+	</md-content>
+	<div layout-align="left center" layout-warp layout='row' class='answer-num'>
+		<span class="content">Answer({{question.answers.length}})||</span>
+		<span>Views(100)</span>
+	</div>
+	<div ng-repeat='answer in question.answers' class='answer-num md-whiteframe-5dp answers' >
+		<p>#{{$index + 1}} about <span am-time-ago='answer.create_time'></span> | {{answer.owner.email}}</p>
+		<p>{{answer.content}}</p>
+		<div layout-align='end' layout='row'>
+			<span ng-click="pride(answer.id, $index)">Thumbs up({{ answer.pride }})</span>
+		</div>
+			<!-- icon-thumb-up-outline  icon-thumb-up-->
+		<!--<button ng-click='deletecom(answer.id)'>Delete answer</button>-->
+	</div>
+	<form ng-submit='submitAnswer()'>
+		<textarea ng-model='answer' width="450" class='answer p10'></textarea>
+		<md-button type='submit' class='md-raised md-primary'>Submit Review</md-button>
+	</form>
+</div>

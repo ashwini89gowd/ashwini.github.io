@@ -1,0 +1,112 @@
+<h4><a href="" ng-click="showDetails = ! showDetails"> Add New Schedule</a></h4>
+<div layout='row' layout-align='end'>
+			<md-input-container  flex='15' class='query'>
+	        	<label>Keyword</label>
+	        	<input required md-no-asterisk name="description" ng-model="query">
+	   	</md-input-container>
+	  </div>
+<md-content  layout-padding class="md-title md-whiteframe-1dp mt20" flex='60' ng-show="showDetails">
+	<h3>New Schedule Info</h3>
+	<form ng-submit="storeSchedule()" name='Schedule' >
+
+
+		<div class="form-group">
+		    <label for="weekday" class="control-label col-md-3">Weekday</label>
+		    <select class="col-md-9"  ng-model="week_day" id="weekday" required>
+		    <option value="">Select a day</option>
+				<option value="sat">Saturday</option>
+				<option value="sun">Sunday</option>
+				<option value="mon">Monday</option>
+				<option value="tue">Tuesday</option>
+				<option value="wed">Wednesday</option>
+				<option value="thu">Thursday</option>
+				<option value="fri">Friday</option>
+			</select>
+		</div>
+		<br>
+
+		<uib-timepicker ng-change="change()" hour-step="1" minute-step="15" show-meridian="true" ng-model="value"  input-empty="value"></uib-timepicker>
+
+	    <div class="form-group">
+	      <label for="from_time" class="control-label col-md-3">Start</label>
+	      <input type="time" class="col-md-9" id="from_time" ng-model="from_time" required></input>
+	    </div>
+
+	    <br>  
+
+	    <div class="form-group">
+	      <label for="to_time" class="control-label col-md-3">End</label>
+	      <input type="time" class="col-md-9" id="to_time" ng-model="to_time" required></input>
+	    </div> 
+
+	    <div class="form-group">
+			<label for="status" class="control-label col-md-3">Status</label>
+			<span class="col-md-9" >
+				<input type="radio" ng-model="$parent.status" name="status" ng-value="0" />
+				Inactive
+			</span>
+			
+			
+
+		</div> 
+	    
+	    <!-- <div class="form-group col-md-12">
+	      <label class="checkbox-inline">
+	        <input type="checkbox" id="inlineCheckbox1" value="sat"> Sat
+	      </label>
+	      <label class="checkbox-inline">
+	        <input type="checkbox" id="inlineCheckbox2" value="sun"> Sun
+	      </label>
+	      <label class="checkbox-inline">
+	        <input type="checkbox" id="inlineCheckbox3" value="mon"> Mon
+	      </label>
+	      <label class="checkbox-inline">
+	        <input type="checkbox" id="inlineCheckbox3" value="tue"> Tue
+	      </label>
+	      <label class="checkbox-inline">
+	        <input type="checkbox" id="inlineCheckbox3" value="wed"> Wed
+	      </label>
+	      <label class="checkbox-inline">
+	        <input type="checkbox" id="inlineCheckbox3" value="thu"> Thu
+	      </label>
+	      <label class="checkbox-inline">
+	        <input type="checkbox" id="inlineCheckbox3" value="fri"> Fri
+	      </label>
+
+	    </div> -->
+
+	   
+	   	<md-button type = 'submit' class='md-block md-raised md-primary col-md-offset-3' ng-disabled="Schedule.$invalid">Create a new schedule</md-button>
+
+  </form>
+</md-content>
+
+<div class="row">
+  <div class="col-sm-2"><strong>Weekday</strong></div>
+  <div class="col-sm-2"><strong>Start time</strong></div>
+  <div class="col-sm-2"><strong>Time End</strong></div>
+  <div class="col-sm-2"><strong>Expert</strong></div>
+  <div class="col-sm-2"><strong>Status</strong></div>
+  
+</div>
+
+       
+<div class="row " ng-repeat="schedule in schedules | filter:query"  >
+
+	<div class="col-sm-2">{{schedule.week_day}}</div>
+	<div class="col-sm-2">{{schedule.from_time}}</div>
+	<div class="col-sm-2">{{schedule.to_time}}</div>
+	<div class="col-sm-2">{{schedule.ownerId}}</div>
+	<div class="col-sm-2">{{schedule.status}}</div>
+	<div class="col-sm-2">	
+	<a class="btn btn-primary btn-sm" href="#/edit-schedule?s={{schedule.id}}">edit</a>
+	</div>
+	<hr/>
+</div>
+
+<script type="text/javascript">
+
+</script>
+
+            
+   

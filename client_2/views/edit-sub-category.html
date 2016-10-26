@@ -1,0 +1,20 @@
+<h1>Edit Your Sub Category </h1>
+<div class="md-whiteframe-5dp p20" layout-align="center" layout='column'>
+  <form ng-submit="updateSubCategory()" name='SubCategory'>
+    <md-input-container class='md-block md-title'>
+      <label>title</label>
+      <input type="text" ng-model='subcategory.title' required/>
+    </md-input-container>
+
+    <div class="form-group">
+		<select ng-model="subcategory.categoryId" required="required" class="front-search">
+			<option value="">Select a Category</option>
+			<option ng-repeat="category in categories" value="{{category.id}}" >{{category.title}}</option>
+		</select>
+	</div>
+
+    <label>Body</label>
+    <textarea  class="create" ng-model = 'subcategory.body' required/>
+    <md-button type = 'submit' class='md-block md-raised md-primary' ng-disabled="SubCategory.$invalid">Confirm the changes</md-button>
+  </form>
+</div>

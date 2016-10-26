@@ -1,0 +1,15 @@
+<div class="md-whiteframe-5dp profile p20 m20" layout-align='center start' layout='column'>
+	<h1>Your Information:</h1>
+	<h3 ng-if='User.profiles.name'>Username:{{User.profiles.name}}</h3>
+	<h3 ng-if="User.email">Email:{{User.email}}</h3>
+	<h3 ng-if='User.profiles.username'>Username:{{User.profiles.username}}</h3>
+	<h3 ng-if="User.profiles.phone">Phone:{{ User.profiles.phone}}</h3>
+	<h3 ng-if="User.profiles.country">Country:{{ User.profiles.country}}</h3>
+	<h3 ng-if="User.profiles.state">State:{{ User.profiles.state}}</h3>
+	<h3 ng-if="User.profiles.city">City: {{ User.profiles.city}}</h3>
+	<h3 ng-if="User.profiles.address">Address:{{ User.profiles.address}}</h3>
+	<p>
+		<!-- <md-button class="md-raised md-primary md-body1" ui-sref="create-page">Ask a question</md-button> -->
+		<md-button class="md-raised md-primary md-body1" ui-sref="edit-profile">Edit Information</md-button>
+	</p>
+</div>

@@ -1,0 +1,35 @@
+<h1>Create Sub Category</h1>
+<div class="md-whiteframe-5dp p20" layout-align="center" layout='column'>
+	<form ng-submit="createSubCategory()" ng-controller="AdminCategoryCtrl" name='subCategoryForm'>
+		<md-input-container class='md-block md-title'>
+			<label>title</label>
+			<input type="text" ng-model="title" required/>
+		</md-input-container>
+
+		<label>Catgories</label>
+		<div class="form-group">
+			<!-- <label data-ng-repeat="category in categories" class="checkbox-inline">
+				<input type="radio" ng-model="$parent.categoryId" name="category" ng-value="category.id" />
+				{{category.title}}
+			</label> -->
+			<select ng-model="categoryId" required="required" class="front-search">
+				<option value="">Select a Category</option>
+				<option ng-repeat="category in categories" value="{{category.id}}" >{{category.title}}</option>
+			</select>
+			<!--<a ng-click="">{{category.title}}</a>-->
+
+		</div>
+
+    <label>Body</label>
+		<textarea  class="create" ng-model = 'body' required/>
+		<md-button type = 'submit' class='md-block md-raised md-primary' ng-disabled="subCategoryForm.$invalid">Create a new sub category</md-button>
+	</form>
+</div>
+
+<div ng-repeat="sub_category in sub_categories" class='md-title question p-10'>
+	<p class="pl-10"><a ng-click="personBySubCategory(sub_category.id)">{{sub_category.title}} ({{sub_category.category.title}})</a>
+		<md-button class="md-primary md-raised" ng-click="editSubCategory(sub_category.id)">Modify</md-button>
+		<md-button ng-click="removeSubCategory(sub_category.id)" class="md-warn md-raised m10">Delete</md-button>
+	</p>
+	<hr>
+</div>

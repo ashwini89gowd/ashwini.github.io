@@ -1,0 +1,43 @@
+<h4>
+<a  href="" >
+<span ng-if="currentState == 'bookingMgt'">Booking<span ng-if="bookings.length > 1">s</span> </span>
+<span ng-if="currentState == 'myBookingMgt'">My Booking<span ng-if="bookings.length > 1">s</span> </span>
+
+</a>
+</h4>
+<md-input-container  flex='15' class='query'>
+	<label>Search</label>
+	<input required md-no-asterisk name="description" ng-model="query">
+</md-input-container>
+<div class="row">
+  <div class="col-sm-2"><strong>Datetime</strong></div>
+  <div class="col-sm-2"><strong>Expert</strong></div>
+  <div class="col-sm-2"><strong>Consumer</strong></div>
+  <div class="col-sm-3"><strong>Created at</strong></div>
+  <div class="col-sm-1"><strong>Status</strong></div>
+  <div class="col-sm-2" ng-if="currentState=='bookingMgt'"><strong>Action</strong></div>
+  
+</div>
+
+       
+<!-- <div class="row " ng-repeat="booking in bookings | orderBy:'-'" > -->
+<div class="row " ng-repeat="booking in bookings | filter:query" >
+
+	<div class="col-sm-2"><!-- {{booking.datetime }} --><mydate>{{booking.datetime | date:'yyyy-MM-dd HH:mm Z'}}</mydate></div>
+	<div class="col-sm-2"> <a href="admin.html#/user-profile?up={{booking.expert_id}}">{{booking.expert_email}}</a> </div>
+	<div class="col-sm-2"> <a href="admin.html#/user-profile?up={{booking.consumer_id}}">{{booking.consumer_email}}</a> </div>
+	<div class="col-sm-3">{{booking.created_time}}</div>
+	<div class="col-sm-1">{{booking.status}}</div>
+	<div class="col-sm-2" ng-if="currentState=='bookingMgt'">
+	<a class='btn btn-danger btn-sm'  ng-click="removeBooking(booking.id)" >delete</a></div>
+	<!-- <a class="btn btn-primary btn-sm" href="#/edit-booking?b={{booking.id}}">edit</a> -->
+	<hr/>
+</div>
+	
+
+<script type="text/javascript">
+	
+</script>
+
+            
+   

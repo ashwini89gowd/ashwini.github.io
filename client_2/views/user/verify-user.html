@@ -1,0 +1,14 @@
+<div style="margin-top:80px;">
+	
+	<div class="alert alert-success text-center" ng-if="profile.is_verified == 1">
+		<h4> Email confirmed.
+			<a ui-sref="logout">Login</a>
+		</h4>
+	</div>
+	
+	<div class="alert alert-danger text-center" ng-if="profile.is_verified != 1">
+		<h4> 
+			Page not found.
+		</h4>
+	</div>
+</div>

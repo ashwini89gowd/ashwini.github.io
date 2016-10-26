@@ -1,0 +1,129 @@
+ <section class="header-2-sub bg-midnight-blue">
+    <div class="background">
+        &nbsp;
+    </div>
+    <div class="container">
+        <div class="row search-form">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="hero-unit">
+                    <ng-include src="'views/user/search_form.html'"></ng-include>
+                </div>
+                <!-- <div class="btns">
+                    <a class="btn btn-inverse" href="#">Learn More</a>
+                    <a class="btn btn-danger" href="#">Buy Now for $9</a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-10" style="padding-top: 20px; padding-bottom: 0px;" ng-if='bookings.length > 0'>
+    <div class="container">
+        <div class="row" >
+            <div class="col-sm-12 text-center">
+                <h3>
+                    <span ng-if="islogin==true">Your</span>
+                    <span ng-if="islogin==false">Latest</span> 
+                    Appointment<span ng-if='bookings.length > 1'>s</span>
+                </h3>
+            </div>
+            <div class="col-sm-3" ng-repeat="booking in bookings" >
+               
+                <h6>{{experts[$index].name}} with {{consumers[$index].name}}</h6>
+                <p>
+                    {{booking.datetime | date: 'yyyy-MM-dd'}} at 
+                    {{booking.datetime | date: 'hh:mm a'}}
+                </p>
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+<hr/>
+<section class="content-10" style="padding-top: 20px; padding-bottom: 0px;" ng-if='bookings.length == 0'>
+    <div class="container">
+        <div class="row" >
+            <div class="col-sm-12 text-center">
+                <h5>
+                    <span ng-if="islogin==true">You haven't booked an appointment yet!</span>
+                </h5>
+            </div>
+        </div>
+    </div>
+</section>
+            <!-- content-10  -->
+<section class="content-10" style="padding-top: 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>FIND AN EXPERT NEAR YOU & BOOK AN APPOINTMENT</h3>
+                <p>
+                    
+                </p>
+                <div class="features">
+                    <div class="box">
+                        <img src="vendor/common-files/static_imgs/info_icon.png" width="100" height="100" alt="">
+                        <h6>Expert’s information</h6>
+                        <p>
+                            Choose an expert from a large number of experts.
+                        </p>
+                    </div>
+                    <div class="box">
+                        <img src="vendor/common-files/static_imgs/appointment.png" width="100" height="100" alt="">
+                        <h6>Book appointment</h6>
+                        <p>
+                            Setup an appointment with an expert from the available time.
+                        </p>
+                    </div>
+                    <div class="box">
+                        <img src="vendor/common-files/static_imgs/feedback.png" width="100" height="100" alt="" >
+                        <h6>Provide feedback</h6>
+                        <p>
+                            Feedback is really helpful to choose expert.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-sm-offset-2 text-center">
+                <div id="c-10_myCarousel" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="vendor/common-files/static_imgs/iphone@2x.png" width="303" height="636" alt="" >
+                        </div>
+                        <div class="item">
+                            <img src="vendor/common-files/static_imgs/screen-2@2xc-30.png" width="303" height="636" alt="" >
+                        </div>
+                        <div class="item">
+                            <img src="vendor/common-files/static_imgs/screen-4@2x.png" width="303" height="636" alt="" >
+                        </div>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#c-10_myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#c-10_myCarousel" data-slide-to="1"></li>
+                        <li data-target="#c-10_myCarousel" data-slide-to="2"></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <!-- logos -->
+<section class="logos">
+    <div class="container">
+        <div><img src="vendor/common-files/static_imgs/mashable.png" alt="">
+        </div>
+        <div><img src="vendor/common-files/static_imgs/guardian.png" alt="">
+        </div>
+        <div><img src="vendor/common-files/static_imgs/forbes.png" alt="">
+        </div>
+        <div><img src="vendor/common-files/static_imgs/red-bull.png" alt="">
+        </div>
+        <div><img src="vendor/common-files/static_imgs/ny-times.png" alt="">
+        </div>
+    </div><!--/.container-->
+</section>
+
+
+    

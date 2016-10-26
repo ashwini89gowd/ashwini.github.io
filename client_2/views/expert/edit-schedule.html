@@ -1,0 +1,54 @@
+
+<md-content  layout-padding class="md-title md-whiteframe-1dp mt20" flex='60' >
+	<h3>Edit Schedule</h3>
+	<form ng-submit="adminUpdateSchedule(schedule.id)" name='scheduleUpdate' >
+
+
+		<div class="form-group">
+		    <label for="weekday" class="control-label col-md-3">Weekday</label>
+		    <select class="col-md-9" name="week_day"  ng-model="schedule.week_day" id="weekday" disabled="disabled" required>
+		    	<option value="">Select a day</option>
+				<option value="sat">Saturday</option>
+				<option value="sun">Sunday</option>
+				<option value="mon">Monday</option>
+				<option value="tue">Tuesday</option>
+				<option value="wed">Wednesday</option>
+				<option value="thu">Thursday</option>
+				<option value="fri">Friday</option>
+			</select>
+		</div>
+		<br>
+
+
+	    <div class="form-group">
+	      <label for="from_time" class="control-label col-md-3">Start</label>
+	      <input type="time" class="col-md-9" id="from_time" ng-model="from_time" ng-value="schedule.from_time" required></input>
+	    </div>
+
+	    <br>  
+
+	    <div class="form-group">
+	      <label for="to_time" class="control-label col-md-3">End</label>
+	      <input type="time" class="col-md-9" id="to_time" ng-model="to_time" ng-value="schedule.to_time" required></input>
+	    </div> 
+
+	    <div class="form-group">
+			<label for="status" class="control-label col-md-3">Status</label>
+			<span class="col-md-9" >
+				<input type="radio" ng-model="$parent.status" name="status" ng-value="0" ng-value="schedule.status" />
+				Deactivate
+			</span>
+			
+			
+
+		</div> 
+
+	   
+	   	<md-button type = 'submit' class='md-block md-raised md-primary col-md-offset-3' >Update schedule</md-button>
+
+  </form>
+</md-content>
+
+
+            
+   

@@ -1,0 +1,20 @@
+<h1>Create Category</h1>
+<div class="md-whiteframe-5dp p20" layout-align="center" layout='column'>
+	<form ng-submit="createCategory()" name='categoryForm'>
+		<md-input-container class='md-block md-title'>
+			<label>title</label>
+			<input type="text" ng-model="title" required/>
+		</md-input-container>
+    <label>Body</label>
+		<textarea  class="create" ng-model = 'body' required/>
+		<md-button type = 'submit' class='md-block md-raised md-primary' ng-disabled="categoryForm.$invalid">Create a new category</md-button>
+	</form>
+</div>
+
+<div ng-repeat="category in categories" class='md-title question p-10'>
+	<p class="pl-10"><a ng-click="questionByCategory(category.id)">{{category.title}}</a>
+		<md-button class="md-primary md-raised" ng-click="editCategory(category.id)">Modify</md-button>
+		<md-button ng-click="removeCategory(category.id)" class="md-warn md-raised m10">Delete</md-button>
+	</p>
+	<hr>
+</div>

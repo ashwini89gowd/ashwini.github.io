@@ -1,0 +1,172 @@
+<div class="container">
+<div class="row">
+<div class="col-md-7">
+
+<md-content class='md-whiteframe-1dp mt20 md-title' layout-padding layout-wrap flex='95'>
+	<h4>Edit {{user.name}}'s' info</h4>
+	<form ng-submit="adminUpdateUser(user)" name="profile" novalidate>
+		<div ng-if="user.is_verified != 1" class="alert alert-danger" >
+			User's email is not verified yet.
+		</div>
+
+		<md-input-container class="md-block">
+			<label>Full name</label>
+			<input ng-model="user.name"/>
+		</md-input-container class="md-block">
+		<!-- <md-input-container class="md-block">
+			<label>Username</label>
+			<input ng-model="user.username"/>
+		</md-input-container class="md-block"> -->
+		<select ng-model="user.gender">
+			<option value="">Select Gender</option>
+			<option value="m">Male</option>
+			<option value="f">Female</option>
+			<option value="o">Other</option>
+		</select><br /><br />
+		<!-- <md-input-container class="md-block">
+			<label>Admin</label>
+			<input ng-model="user.type" ng-value='admin' disabled="disabled" />
+		</md-input-container class="md-block"> -->
+		<!-- {{user.is_verified}} -->
+		
+		<select ng-model="user.type" ng-if="user.is_verified==1" required>
+		<option value="owner">Owner</option>
+			<option value="expert">Expert</option>
+			<option value="consumer">Consumer</option>
+		</select><br /><br />
+		<div ng-show="user.type=='expert'" ng-if="user.is_verified==1" >
+			<SELECT  class="col-md-4 col-sm-12 col-xs-10 front-search" style="color:#333;" ng-model="user.expert_category" ng-change="onSelect(user.expert_category)" required>
+		    	<option value="">Select expertise Category</option>
+				<option ng-repeat="category in categories" value="{{category.id}}" >{{category.title}}</option>
+		    </SELECT>
+
+		    <SELECT  class="col-md-4 col-sm-12 col-xs-10 col-md-offset-1 front-search" style="color:#333;" ng-model="user.expert_sub_category" >
+		    	<option value="" >Select expertise sub category</option>
+		        <option ng-repeat="subcategory in subcategories" value="{{subcategory.id}}" >{{subcategory.title}}</option>
+		    </SELECT><br /><br />
+	    </div>
+		<md-input-container class="md-block">
+			<label>Phone</label>
+			<input ng-model='user.phone' />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>Country</label>
+			<input ng-model="user.country" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>State</label>
+			<input ng-model="user.state" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block" >
+			<label>City</label>
+			<input ng-model="user.city" />
+		</md-input-container class="md-block">
+		<input type="hidden" ng-model="user.id" ng-value="{{user.id}}" />
+
+		<input type="hidden" id="latbox" ng-model="user.lat" ng-value="{{user.lat}}" />
+		<input type="hidden" id="lngbox" ng-model="user.lon" ng-value="{{user.lon}}" />
+
+		<md-input-container class="md-block">
+			<label>Address</label>
+			<input ng-model="user.address" />
+		</md-input-container class="md-block">
+
+		<!-- <md-input-container class="md-block">
+		<label>Latitude</label>
+		<input ng-model="user.lat" id="latbox" />
+		</md-input-container class="md-block">
+
+		<md-input-container class="md-block">
+		<label>Longitude</label>
+		<input type="text" ng-model="user.lon" id="lngbox" />
+		</md-input-container class="md-block"> -->
+
+		<md-input-container class="md-block">
+			<label>National ID #</label>
+			<input ng-model="user.national_id" />
+		</md-input-container class="md-block">
+		<md-button type="submit" ng-disabled="edit.$invalid" class="md-primary md-raised md-hue-1">Modify</button>
+		
+	</form>
+</md-content>
+
+</div>
+<div class="col-md-4">
+	
+<script>
+
+setTimeout(function(){ 
+	var lat = $('#latbox').attr("ng-value");
+	var lon = $('#lngbox').attr("ng-value");
+
+	if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+
+	myMap();
+	function myMap() {
+		
+
+        mysrclat = position.coords.latitude; 
+        mysrclong = position.coords.longitude;
+        if (lat == undefined || lat == "")
+        	mysrclat = position.coords.latitude;
+        else
+        	mysrclat = lat;
+        	
+        if (lon == undefined || lon == "")
+        	mysrclong = position.coords.longitude;
+        else
+        	mysrclong = lon;
+
+        console.log(mysrclat);
+        console.log(mysrclong);
+        /*document.getElementById("latbox").value = mysrclat;
+	    document.getElementById("lngbox").value = mysrclong;*/
+	        
+	  latLng = new google.maps.LatLng(mysrclat, mysrclong)
+	  var mapOptions = {
+	    center: latLng,
+	    zoom: 16,
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	  };
+	  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+	  var marker = new google.maps.Marker({
+	      position: latLng,
+	      title:"Hello World!",
+	      visible: true,
+	      draggable:true
+	  });
+
+	  google.maps.event.addListener(marker, 'dragend', function (event) {
+	    document.getElementById("latbox").value = this.getPosition().lat();
+	    document.getElementById("lngbox").value = this.getPosition().lng();
+	});
+
+	  marker.setMap( map );
+	  moveBus( map, marker );
+	}
+
+	function moveBus( map, marker ) {
+
+	    marker.setPosition( new google.maps.LatLng( mysrclat, mysrclong ) );
+	    map.panTo( new google.maps.LatLng( mysrclat, mysrclong ) );
+	};
+
+	
+
+	});
+}
+}, 1000);
+
+
+
+</script>
+
+
+<div id="map" class="" style="width:400px; height:400px; background: #2c3e50; position: relative; overflow: hidden; top: 16px;"><h3 style="color:#fff;">Click Allow to locate current position on the map.</h3></div>
+</div>
+</div>
+</div>
+
+

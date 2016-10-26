@@ -1,0 +1,10 @@
+<h1>Edit Your Answer</h1>
+<div class="md-whiteframe-5dp p20" layout-align="center" layout='column'>
+  <form ng-submit="updateAnswer()" name='Answer'>
+    <md-input-container class='md-block md-title'>
+    <!--{{ answer.content }}-->
+    </md-input-container>
+    <textarea  rows='5' cols='155' ng-model = 'answer.content' required/>
+    <md-button type = 'submit' class='md-block md-raised md-primary' ng-disabled="Answer.$invalid">Confirm the changes</md-button>
+  </form>
+</div>

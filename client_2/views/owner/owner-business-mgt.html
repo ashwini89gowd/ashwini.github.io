@@ -1,0 +1,106 @@
+<h4><a href="" ng-click="showDetails = ! showDetails" >Add New Business</a></h4>
+<div layout='row' layout-align='end'>
+			<md-input-container  flex='15' class='query'>
+	        	<label>Keyword</label>
+	        	<input required md-no-asterisk name="description" ng-model="query">
+	   	</md-input-container>
+	  </div>
+<md-content  layout-padding class="md-title md-whiteframe-1dp mt20" flex='90' ng-show="showDetails" >
+	<h3>New Business info</h3>
+	<form ng-submit="storeBusiness()" name='BusinessRegist'>
+		<md-input-container class="md-block">
+			<label>Name</label>
+			<input type="text" ng-model="name" required/><br />
+		</md-input-container>
+
+		<md-input-container class="md-block">
+			<label></label>
+			<input type="text" ng-model="search_owner" placeholder="Search director by name " />
+			Select a owner<br/>
+			<select class="front-search" ng-model="director_profile_id" style='min-width: 144px;' size="7" ng-click="ownerDet(director_profile_id)" required>
+				
+				<option  value="{{user}}" selected="selected">{{user.name}}</option>
+			</select><br />
+			<span ng-if="user">Name: <b>{{user.name}}</b> -- Email: <b>{{user.email}}</b> -- Phone: <b>{{user.phone}}</b></span>
+			<br />
+			
+		</md-input-container>
+		
+		
+			<!-- <label>User type</label> -->
+			<!-- <select ng-model="type" required>
+				<option value="doctor">Doctor</option>
+				<option value="patient">Patient</option>
+			</select><br /><br /> -->
+		<!-- <md-input-container>
+			<md-select ng-model="type" placeholder="Select user type">
+			    <md-option ng-value="doctor" > Doctor </md-option>
+			    <md-option ng-value="patient" > Patient </md-option>
+			</md-select>
+		</md-input-container> -->
+		<md-input-container class="md-block">
+			<label>Phone</label>
+			<input type="text" ng-model="phone" required/><br />
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Country</label>
+			<input type="text" ng-model="country" required/><br />
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>State</label>
+			<input type="text" ng-model="state" /><br />
+		</md-input-container>
+		<md-input-container class='md-block'>
+			<label>City</label>
+			<input type='text' ng-model='city' required/><br/>
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Address</label>
+			<input type="text" ng-model="address" required/><br />
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Establishment date</label>
+			<input type="text" ng-model="establishment_date" required/><br />
+		</md-input-container>
+		
+		<md-input-container class="md-block">
+			<label>Web Address</label>
+			<input type="text" ng-model="web_address" /><br />
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Business ID</label>
+			<input type="text" ng-model="business_id" required/><br />
+		</md-input-container>
+		
+		<md-button type="submit" ng-disabled="BusinessRegist.$invalid" class="md-primary md-raised">Register</md-button>
+	</form>
+</md-content>
+
+<div class="row">
+  <div class="col-md-2"><strong>Name</strong></div>
+  <div class="col-md-2"><strong>Admin</strong></div>
+  <div class="col-md-1"><strong>Phone</strong></div>
+  <div class="col-md-2"><strong>Country</strong></div>
+  <div class="col-md-2"><strong>State</strong></div>
+  <div class="col-md-1"><strong>City</strong></div>
+  <div class="col-md-2"><strong>Action</strong></div>
+</div>
+
+       
+<div class="row " ng-repeat="business in businesses | filter:query"  >
+
+
+	<div class="col-md-2">{{business.name}}</div>
+	<div class="col-md-2">{{business.owner_profile.name}}</div>
+	<div class="col-md-1">{{business.phone}}</div>
+	<div class="col-md-2">{{business.country}}</div>
+	<div class="col-md-2">{{business.state}}</div>
+	<div class="col-md-1">{{business.city}}</div>
+	<div class="col-md-2">
+		<!-- <button type="button" ui-sref='editUser(user.id)' class="btn btn-primary btn-sm">edit</button> -->
+		<a class="btn btn-primary btn-sm" href="#/business-edit?h={{business.id}}">edit</a>
+	</div>
+	<hr/>
+</div>
+            
+   

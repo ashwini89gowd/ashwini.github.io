@@ -1,0 +1,141 @@
+ <section class="header-2-sub bg-midnight-blue" style="padding-top: 110px !important;padding-bottom: 40px !important;">
+    <div class="background">
+        &nbsp;
+    </div>
+    <div class="container">
+        <div class="row search-form">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="hero-unit">
+                    <ng-include src="'views/user/search_form.html'"></ng-include>
+                </div>
+                <!-- <div class="btns">
+                    <a class="btn btn-inverse" href="#">Learn More</a>
+                    <a class="btn btn-danger" href="#">Buy Now for $9</a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+            <!-- content-10  -->
+<section class="content-10" style="padding-top: 25px !important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3>FIND AN EXPERT NEAR YOU & BOOK AN APPOINTMENT</h3>
+                <p>
+                    
+                </p>
+                <div class="search-expert">
+                    <div class="box" ng-repeat="user in users">
+                        <div class="well well-sm">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4">
+                                <img ng-if="user.gender == 'm'" class="img-rounded img-responsive" src="vendor/common-files/static_imgs/user-male.png" alt="">
+                                <img ng-if="user.gender == 'f'" class="img-rounded img-responsive" src="vendor/common-files/static_imgs/user-female.png" alt="">
+                                <img ng-if="user.gender == 'o' || user.gender == undefined" class="img-rounded img-responsive" src="vendor/common-files/static_imgs/user-common.png" alt="">
+                                <p class="text-center">{{subcategories.title}}</p>
+                                <p class="text-center">{{user.business.name}}</p>
+                            </div>
+                            <div class="col-sm-6 col-md-8">
+                                <h4>{{user.name}}</h4>
+                                <small><cite title="{{user.address}}, {{user.city}}, {{user.country}}"  ng-if="user.address || user.city || user.country">{{user.address}}, {{user.city}}, {{user.country}}<i class="glyphicon glyphicon-map-marker">
+                                </i></cite></small>
+                                <p>
+                                <!-- <small><cite title="{{user.address}}"><i class="glyphicon glyphicon-home"></i> {{user.address}} </cite></small>
+                                <br /> -->
+                                <i class="glyphicon glyphicon-phone" ng-if="user.phone"></i> {{user.phone}}
+                                <br />
+                                
+                                <i class="glyphicon glyphicon-envelope" ng-if="user.email"></i> {{user.email}}
+                                <br/>
+                                <i class="glyphicon glyphicon-office" ng-if="user.business.name"></i> {{user.business.name}}
+                                </p>
+                                <!-- Split button -->
+                                <form ng-submit="bookingInfo()" ng-controller="FrontPageCtrl" >
+                                    <md-content layout-padding>
+                                    <div layout-gt-xs="row">
+                                      <div flex-gt-xs>
+                                        <!-- <h4>Only weekends within given range are selectable</h4> -->
+                                        <md-datepicker ng-model="bookDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                                      </div>
+
+                                      <!-- <div flex-gt-xs>
+                                        <h4>Opening the calendar when the input is focused</h4>
+                                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"
+                                          md-open-on-focus></md-datepicker>
+                                      </div> -->
+                                    </div>
+                                    </md-content>
+                                    
+                                        <!-- <input type="text" ng-model="expertId" ng-value="user.ownerId" /> -->
+                                        <input type="hidden" name="expertId" ng-model="expertId" ng-init="expertId = user.ownerId" />
+                                     
+                                    <div class="btn-group">
+                                        <button type="submit" class="book-now btn btn-primary">Book Now</button>
+                                        <!-- <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span><span class="sr-only">Social</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">Twitter</a></li>
+                                            <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+                                            <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Github</a></li>
+                                        </ul> -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div ng-if="users.length == 0" class="alert alert-danger" role="alert"><strong>No result found!</strong> Change a few things up and try again.</div>
+
+                    <div ng-if="message != undefined" class="alert alert-danger" role="alert"><strong>{{message}}</strong> </div>
+                    
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div id="c-10_myCarousel" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="vendor/common-files/static_imgs/iphone@2x.png" width="303" height="636" alt="" >
+                        </div>
+                        <div class="item">
+                            <img src="vendor/common-files/static_imgs/screen-2@2xc-30.png" width="303" height="636" alt="" >
+                        </div>
+                        <div class="item">
+                            <img src="vendor/common-files/static_imgs/screen-4@2x.png" width="303" height="636" alt="" >
+                        </div>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#c-10_myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#c-10_myCarousel" data-slide-to="1"></li>
+                        <li data-target="#c-10_myCarousel" data-slide-to="2"></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <!-- logos -->
+<section class="logos">
+    <div class="container">
+        <div><img src="vendor/common-files/static_imgs/mashable.png" alt="">
+        </div>
+        <div><img src="vendor/common-files/static_imgs/guardian.png" alt="">
+        </div>
+        <div><img src="vendor/common-files/static_imgs/forbes.png" alt="">
+        </div>
+        <div><img src="vendor/common-files/static_imgs/red-bull.png" alt="">
+        </div>
+        <div><img src="vendor/common-files/static_imgs/ny-times.png" alt="">
+        </div>
+    </div><!--/.container-->
+</section>
+
+
+
+
+    

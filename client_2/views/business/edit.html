@@ -1,0 +1,63 @@
+<md-content class='md-whiteframe-1dp mt20 md-title' layout-padding layout-wrap flex='90'>
+	<h1>edit information</h1>
+	<form ng-submit="adminUpdateBusiness(business.id)" name="edit">
+		<md-input-container class="md-block">
+			<label>Name</label>
+			<input ng-model="business.name"/>
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>Phone</label>
+			<input ng-model='business.phone' />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>Country</label>
+			<input ng-model="business.country" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>State</label>
+			<input ng-model="business.state" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>City</label>
+			<input ng-model="business.city" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>Address</label>
+			<input ng-model="business.address" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block">
+			<label>Establishment Date</label>
+			<input ng-model="business.establishment_date" />
+		</md-input-container class="md-block">
+		<md-input-container class="md-block" ng-if="userRole=='admin'">
+			<label></label>
+			<input type="text" ng-model="search_owner" placeholder="Search director by name " />
+			Select a owner<br/>
+			<select class="front-search" ng-model="business.director_profile_id" size="7" style='min-width: 144px;' ng-click="ownerDet(business.director_profile_id)" required>
+				
+				<option ng-repeat="owner in owners | filter:search_owner" value="{{owner}}">{{owner.name}}</option>
+			</select><br />
+			<span ng-if="ownerDetails">Name: <b>{{ownerDetails.name}}</b> -- Email: <b>{{ownerDetails.email}}</b> -- Phone: <b>{{ownerDetails.phone}}</b></span>
+			<span ng-if="business.owner && !ownerDetails">Name: <b>{{business.owner_profile.name}}</b> -- Email: <b>{{business.owner_profile.email}}</b> -- Phone: <b>{{business.owner_profile.phone}}</b></span>
+			<br />
+			
+		</md-input-container>
+		<!-- <md-input-container class="md-block">
+			<label>Director</label>
+			<input type="text" ng-model="business.director_profile_id" required/><br />
+		</md-input-container> -->
+		<!-- <md-input-container class="md-block">
+			<label>Logo path</label>
+			<input type="text" ng-model="business.logo_path" required/><br />
+		</md-input-container> -->
+		<md-input-container class="md-block">
+			<label>Web Address</label>
+			<input type="text" ng-model="business.web_address" /><br />
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Business ID</label>
+			<input type="text" ng-model="business.business_id" required/><br />
+		</md-input-container>
+		<md-button type="submit"  class="md-primary md-raised md-hue-1">Modify</button>
+	</form>
+</md-content>

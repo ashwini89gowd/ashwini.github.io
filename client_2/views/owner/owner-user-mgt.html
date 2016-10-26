@@ -1,0 +1,104 @@
+<h4><a href="" ng-click="showDetails = ! showDetails">Add new User</a></h4>
+<div layout='row' layout-align='end'>
+			<md-input-container  flex='15' class='query'>
+	        	<label>Keyword</label>
+	        	<input required md-no-asterisk name="description" ng-model="query">
+	   	</md-input-container>
+	  </div>
+<md-content  layout-padding class="md-title md-whiteframe-1dp mt20" flex='90' ng-show="showDetails">
+	<h3>New User Info</h3>
+
+	<form ng-submit="ownerCreateUser()" name='regist' ng-controller='OwnerActivityCtrl'>
+
+		<SELECT  class="col-md-4 col-sm-12 col-xs-10 front-search" style="color:#333;" ng-model="business" name="business" required>
+				<option  value="" selected="selected">Select a business</option>
+				<option ng-repeat="bsns in currentUserBusiness" value="{{bsns}}" >{{bsns.name}}</option>
+		</SELECT><br /><br />
+
+		<md-input-container class="md-block">
+			<label>Name</label>
+			<input type="text" ng-model="name" required/><br />
+		</md-input-container>
+		
+			<!-- <label>User type</label> -->
+		<!-- <select ng-model="type" class="front-search" required>
+			<option value="">Select User type</option>
+			<option value="expert">Expert</option>
+			<option value="consumer">Consumer</option>
+		</select><br /><br /> -->
+
+		
+
+		<div >
+			<SELECT  class="col-md-4 col-sm-12 col-xs-10 front-search" style="color:#333;" ng-model="expertCategory" ng-change="onSelect(expertCategory)" required>
+		    	<option value="">Select expertise Category</option>
+				<option ng-repeat="category in categories" value="{{category.id}}" >{{category.title}}</option>
+		    </SELECT>
+
+		    <SELECT  class="col-md-4 col-sm-12 col-xs-10 col-md-offset-1 front-search" style="color:#333;" ng-model="expertSubCategory" >
+		    	<option value="" >Select expertise sub category</option>
+		        <option ng-repeat="subcategory in subcategories" value="{{subcategory.id}}" >{{subcategory.title}}</option>
+		    </SELECT><br /><br />
+	    </div>
+		<!-- <md-input-container>
+			<md-select ng-model="type" placeholder="Select user type">
+			    <md-option ng-value="expert" > Doctor </md-option>
+			    <md-option ng-value="consumer" > Patient </md-option>
+			</md-select>
+		</md-input-container> -->
+		<md-input-container class="md-block">
+			<label>Phone</label>
+			<input type="text" ng-model="phone" required/><br />
+		</md-input-container>
+		<!-- <md-input-container class='md-block'>
+			<label>Username</label>
+			<input type='text' ng-model='username' required/><br/>
+		</md-input-container> -->
+		<md-input-container class="md-block">
+			<label>Email</label>
+			<input type="email" name="email" ng-model="email" required/><br />
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Email confirmation</label>
+			<input type="email" name="email" ng-model="confirmEmail" required/><br />
+		</md-input-container>
+		
+		<span class="alert alert-danger" ng-if="email != '' " ng-show="email !== confirmEmail">Email mismatch</span>
+		
+		<md-input-container class="md-block">
+			<label>Password</label>
+			<input type="password" ng-model="password" required></input>
+		</md-input-container>
+		
+		<md-button type="submit" ng-disabled="regist.$invalid" class="md-primary md-raised">Register</md-button>
+	</form>
+</md-content>
+
+<div class="row">
+  <div class="col-sm-2"><strong>Name</strong></div>
+  <div class="col-sm-2"><strong>Business</strong></div>
+  <div class="col-sm-2"><strong>Email</strong></div>
+  <div class="col-sm-1"><strong>Phone</strong></div>
+  <div class="col-sm-1"><strong>Country</strong></div>
+  <div class="col-sm-2"><strong>City</strong></div>
+  <div class="col-sm-2"><strong>Action</strong></div>
+  <hr/>
+</div>
+
+       
+<div class="row " ng-repeat="user in employees | filter:query" >
+
+	<div class="col-sm-2">{{user.name}}</div>
+	<div class="col-sm-2">{{user.business.name}}</div>
+	<div class="col-sm-2">{{user.email}}</div>
+	<div class="col-sm-1">{{user.phone}}</div>
+	<div class="col-sm-1">{{user.country}}</div>
+	<div class="col-sm-2">{{user.city}}</div>
+	<div class="col-sm-2">
+		<!-- <button type="button" ui-sref='editUser(user.id)' class="btn btn-primary btn-sm">edit</button> -->
+		<a class="btn btn-primary btn-sm" href="#/edit-user?u={{user.id}}">edit</a>
+	</div>
+	<hr/>
+</div>
+            
+   

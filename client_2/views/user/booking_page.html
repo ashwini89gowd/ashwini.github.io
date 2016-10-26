@@ -1,0 +1,211 @@
+
+
+<section class="content-10" style="padding-top: 25px !important;" ng-controller='FrontPageCtrl' ng-init='load()'>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 booking-page-profile" style="margin-left:15px;">
+
+                <h4>{{user.name}}</h4>
+                    <img ng-if="user.gender == 'm'" class="img-rounded img-responsive" src="vendor/common-files/static_imgs/user-male.png" alt="">
+                    <img ng-if="user.gender == 'f'" class="img-rounded img-responsive" src="vendor/common-files/static_imgs/user-female.png" alt="">
+                    <img ng-if="user.gender == 'o' || user.gender == undefined" class="img-rounded img-responsive" src="vendor/common-files/static_imgs/user-common.png" alt="">
+                    <h4>{{user.expertise}} </h4>
+
+
+
+                    <small><cite title="{{user.address}}, {{user.city}}, {{user.country}}">{{user.address}}, {{user.city}}, {{user.country}}<i class="glyphicon glyphicon-map-marker">
+                    </i></cite></small>
+                    <p>
+                    <!-- <small><cite title="{{user.address}}"><i class="glyphicon glyphicon-home"></i> {{user.address}} </cite></small>
+                    <br /> -->
+                    <i class="glyphicon glyphicon-phone"></i> {{user.phone}}
+                    <br />
+
+                    <i class="glyphicon glyphicon-envelope"></i> {{user.email}}</p>
+                    <!-- Split button -->
+                    <br/>
+                    
+            </div>
+            <div class="col-md-4 bg-midnight-blue booking-page-form" >
+                
+                <div class="col-md-12 week-schedule" ng-repeat="daily_schedule in week_schedule" style="height: 30px;">
+
+                    
+                    
+                    <div>{{daily_schedule.week_day}} -- {{daily_schedule.from_time}}-{{daily_schedule.to_time}}</div>
+                    
+                    <!-- <a class="btn btn-primary btn-sm" href="#/edit-booking?b={{booking.id}}">edit</a> -->
+                    <hr style="margin-top: 0px; margin-bottom: 1px;" />
+                </div>
+            </div>
+            <div class="col-md-4 text-center bg-midnight-blue booking-page-form"> <!-- col-md-offset-2 -->
+                <div class="background">
+                    &nbsp;
+                </div>
+                <div class="container">
+
+                <div class="row search-form">
+                <div class="col-md-8 col-xs-offset-right-1" >
+                   Available From <span id="from">{{schedule.from_time}}</span> to <span id="to">{{schedule.to_time}}</span>
+                </div>
+
+                <input type="hidden" id="from_time" ng-model="schedule.from_time" ng-value="{{schedule.from_time}}" />
+                <input type="hidden" id="to_time" ng-model="schedule.to_time" ng-value="{{schedule.to_time}}" />
+
+                <input type="hidden" id="latbox" ng-model="user.lat" ng-value="{{user.lat}}" />
+                <input type="hidden" id="lngbox" ng-model="user.lon" ng-value="{{user.lon}}" />
+
+                <div class="col-md-12">
+                <form ng-submit="bookingCreate()" ng-controller="FrontPageCtrl" name='bookNow'>
+                    <md-content layout-padding class='col-md-offset-1' style=' width:300px;'>
+                    <div layout-gt-xs="row">
+                      <div flex-gt-xs>
+                        <!-- <h4>Only weekends within given range are selectable</h4> -->
+                        <md-datepicker ng-model="bookDate" ng-change="bookingByDate(bookDate)" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate" ng-trim="false"></md-datepicker>
+                      </div>
+
+                    </div>
+                    </md-content>
+
+
+                    <div class='col-md-offset-1 book-time' >
+
+
+                        <input id="disableTimeRangesExample" placeholder="Schedule Time" class="time ui-timepicker-input input-book-time" ng-model='bookTime' required/>
+                        <!-- <a ng-href='' ngclick="bookingCheck()" class="btn btn-primary search-btn"><span class="fui-time"></span></a> -->
+                        <!-- <a ng-click='bookingCheck(bookDate, bookTime)' class="btn btn-primary search-btn" href=''>Check availability </a> -->
+
+                        <br/><br/>
+                        <button type="submit" ng-disabled="bookNow.$invalid" class="book-now btn btn-primary">Book Now</button>
+                    </div>
+
+                </form>
+                </div>
+            </div>
+        </div></div>
+        <div id="map" class="col-md-8" style="padding-left:0px; height: 279px; background: #2c3e50; position: relative; overflow: hidden; top: 16px;"><h3 style="color:#fff;">Allow to locate yourself on the map.</h3></div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+$( document ).ready(function() {
+    setTimeout(function(){
+            loadTime()
+
+    }, 2000);
+
+    function loadTime(){
+        $('#disableTimeRangesExample').timepicker({
+                'disableTimeRanges': [['17:00:00', '17:30:00'], ['3am', '4:01am']],
+                'step': '30',
+                'minTime': $('#from_time').attr("ng-value"),
+                'maxTime': $('#to_time').attr("ng-value"),
+                'timeFormat': 'H:i:s'
+            });
+        console.log($('#from_time').attr("ng-value"));
+    }
+
+
+
+    $('#from').change(function(){
+        alert('dfs')
+    });
+
+
+
+    setInterval(function(){
+
+        $('#disableTimeRangesExample').timepicker({
+            'step': '30',
+            'minTime': $('#from_time').attr("ng-value"),
+            'maxTime': $('#to_time').attr("ng-value"),
+            'timeFormat': 'H:i:s'
+        });
+    }, 2000);
+
+
+
+setTimeout(function(){
+    var lat = $('#latbox').attr("ng-value");
+    var lon = $('#lngbox').attr("ng-value");
+
+
+if(lat > 0 && lon > 0){
+
+   /* if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {*/
+
+    myMap();
+    function myMap() {
+
+
+        /*mysrclat = position.coords.latitude;
+        mysrclong = position.coords.longitude;
+        if (lat == undefined || lat == "")
+            mysrclat = position.coords.latitude;
+        else
+            mysrclat = lat;
+
+        if (lon == undefined || lon == "")
+            mysrclong = position.coords.longitude;
+        else
+            mysrclong = lon;*/
+
+        mysrclat = lat;
+        mysrclong = lon;
+
+        console.log(mysrclat);
+        console.log(mysrclong);
+        /*document.getElementById("latbox").value = mysrclat;
+        document.getElementById("lngbox").value = mysrclong;*/
+
+      latLng = new google.maps.LatLng(mysrclat, mysrclong)
+      var mapOptions = {
+        center: latLng,
+        zoom: 16,
+        sensor: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+      var marker = new google.maps.Marker({
+          position: latLng,
+          title:"Hello World!",
+          visible: true
+      });
+
+      google.maps.event.addListener(marker, 'dragend', function (event) {
+        document.getElementById("latbox").value = this.getPosition().lat();
+        document.getElementById("lngbox").value = this.getPosition().lng();
+    });
+
+   /* google.maps.event.addListener(map, 'click', function(event) {
+       //placeMarker();
+       marker.setPosition(event.latLng);
+    });*/
+
+      marker.setMap( map );
+      moveBus( map, marker );
+    }
+
+
+    function moveBus( map, marker ) {
+
+        marker.setPosition( new google.maps.LatLng( mysrclat, mysrclong ) );
+        map.panTo( new google.maps.LatLng( mysrclat, mysrclong ) );
+    };
+
+
+
+/*    });
+}*/
+}
+else{
+    $('#map').hide();
+}
+}, 1000);
+
+});
+</script>

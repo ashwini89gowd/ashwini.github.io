@@ -1,0 +1,16 @@
+<form ng-submit="frontPageSearchSubmit()" ng-controller="FrontPageCtrl" name='search'>
+    
+    <SELECT  class="col-md-3 col-sm-12 col-xs-10 front-search" style="color:#333;" ng-model="expertCategory" ng-change="onSelect(expertCategory)">
+    	<option value="">Select expertise Category</option>
+		<option ng-repeat="category in categories" value="{{category.id}}" >{{category.title}}</option>
+    </SELECT>
+
+    <SELECT  class="col-md-3 col-sm-12 col-xs-10 col-md-offset-1 front-search" style="color:#333;" ng-model="expertSubCategory" >
+    	<option value="" >Select expertise sub category</option>
+        <option ng-repeat="subcategory in subcategories" value="{{subcategory.id}}" >{{subcategory.title}}</option>
+    </SELECT>
+
+    <input type="text" ng-model="keyword" class="col-md-3 col-sm-12 col-xs-10 col-md-offset-1 front-search" placeholder="Search keyword">
+      
+    <button type="submit" class="btn btn-primary search-btn"><span class="fui-search"></span></button>
+</form>

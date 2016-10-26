@@ -1,0 +1,13 @@
+<h1>Edit Your Category </h1>
+<div class="md-whiteframe-5dp p20" layout-align="center" layout='column'>
+  <form ng-submit="updateCategory()" name='Category'>
+    <md-input-container class='md-block md-title'>
+      <label>title</label>
+      <input type="text" ng-model='category.title' required/>
+    </md-input-container>
+
+    <label>Body</label>
+    <textarea  class="create" ng-model = 'category.body' required/>
+    <md-button type = 'submit' class='md-block md-raised md-primary' ng-disabled="Category.$invalid">Confirm the changes</md-button>
+  </form>
+</div>

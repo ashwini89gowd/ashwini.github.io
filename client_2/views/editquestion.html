@@ -1,0 +1,18 @@
+<h1>Edit Your Question</h1>
+<div class="md-whiteframe-5dp p20" layout-align="center" layout='column'>
+	<form ng-submit="editpage()" name='Question'>
+		<md-input-container class='md-block md-title'>
+			<label>Title</label>
+			<input type="text" ng-model="question.title" required/>
+		</md-input-container>
+		<label>Catgories</label>
+		<div class="form-group">
+			<label data-ng-repeat="category in categories" class="checkbox-inline">
+				<input type="radio" ng-model="question.categoryId" ng-checked="(category.id == question.categoryId)" name="category" ng-value="category.id" />
+				{{category.title}}
+			</label>
+        </div>
+		<textarea  rows='5' cols='155' ng-model = 'question.content' required/>
+		<md-button type = 'submit' class='md-block md-raised md-primary' ng-disabled="Question.$invalid">Confirm the changes</md-button>
+	</form>
+</div>
